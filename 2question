@@ -1,0 +1,43 @@
+123. Best Time to Buy and Sell Stock III
+class Solution {
+    public int maxProfit(int[] prices) {
+        
+    int misf = prices[0];
+    int[] ps = new int[prices.length];
+    for (int i = 1; i < prices.length; i++) {
+      if (prices[i] < misf) {
+        misf = prices[i];
+      }
+
+      if (prices[i] - misf > ps[i - 1]) {
+        ps[i] = prices[i] - misf;
+      } else {
+        ps[i] = ps[i - 1];
+      }
+    }
+
+    int masf = prices[prices.length - 1];
+    int[] pb = new int[prices.length];
+    for (int i = prices.length - 2; i >= 0; i--) {
+      if (prices[i] > masf) {
+        masf = prices[i];
+      }
+
+      if (masf - prices[i] > pb[i + 1]) {
+        pb[i] = masf - prices[i];
+      } else {
+        pb[i] = pb[i + 1];
+      }
+    }
+
+    int mp = Integer.MIN_VALUE;
+    for (int i = 0; i < prices.length; i++) {
+      if (ps[i] + pb[i] > mp) {
+        mp = ps[i] + pb[i];
+      }
+    }
+
+    return mp;
+        
+    }
+}
