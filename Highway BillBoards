@@ -1,0 +1,30 @@
+Highway BillBoards
+import java.util.* ;
+import java.io.*; 
+ 
+public class Solution {
+
+	public static int highwayBillboard(int[] billboards, int[] revenue, int m, int x) {
+	 	// Write your code here.
+		 int []dp=new int[billboards.length];
+		 int ans=0;
+		 dp[0]=revenue[0];
+		 for(int i=0;i<billboards.length;i++){
+			  int max = 0;
+
+			 for(int j=0;j<i;j++){
+				
+				  int dist =billboards[i] - billboards[j];
+        if (dist > x)
+        {
+          max = Math.max(max, dp[j]);
+        }
+      }
+      dp[i] = max +revenue[i];
+      ans = Math.max(ans, dp[i]);
+			 }
+			 return ans;
+		 }
+	}
+
+
